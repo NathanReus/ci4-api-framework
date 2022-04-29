@@ -1,0 +1,32 @@
+{
+  "name": "nathanreus/ci4-api-framework",
+  "type": "library",
+  "description": "Flexible API framework system for CodeIgniter 4.",
+  "keywords": [],
+  "homepage": "https://github.com/NathanReus/ci4-api-framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nathan Reus",
+      "email": "nathan.reus@gmail.com",
+      "homepage": "https://nathanreus.com.au/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.3 || ^8.0",
+    "myth/auth": "1.0.1",
+    "firebase/php-jwt": "6.1.0",
+    "ircmaxell/random-lib": "1.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NathanReus\\CI4APIFramework\\": "src"
+    },
+    "exclude-from-classmap": [
+      "**/Database/Migrations/**"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
