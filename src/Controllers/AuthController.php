@@ -5,6 +5,7 @@ namespace NathanReus\CI4APIFramework\Controllers;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use NathanReus\CI4APIFramework\Config\API as APIConfig;
 use RandomLib\Factory;
 use Exception;
 
@@ -15,11 +16,17 @@ class AuthController extends APIController
 	/**
 	 * @var AuthConfig
 	 */
-	protected $config;
+	protected $authConfig;
+
+	/**
+	 * @var APIConfig
+	 */
+	protected $apiConfig;
 
 	public function __construct()
 	{
-		$this->config = config('Auth');
+		$this->authConfig = config('Auth');
+		$this->apiConfig = config('API');
 		$this->auth = service('authentication');
 	}
 
@@ -109,7 +116,7 @@ class AuthController extends APIController
 			// No existing Refresh Token Family has been passed in, let's make a new one
 			$randomFactory = new Factory;
 			$randomGenerator = $randomFactory->getLowStrengthGenerator();
-			$refreshTokenFamily = $randomGenerator->generateString($this->config->refreshTokenFamilyHashLength, $this->config->refreshTokenFamilyCharacters);
+			$refreshTokenFamily = $randomGenerator->generateString($this->apiConfig->refreshTokenFamilyHashLength, $this->apiConfig->refreshTokenFamilyCharacters);
 		}
 
 		$tokens = getTokensForUser($email, $refreshTokenFamily);

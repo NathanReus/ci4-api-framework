@@ -122,7 +122,7 @@ function getJWTForUser(string $email, int $tokenTimeToLive, bool $isRefresh = fa
 
 function getTokensForUser(string $email, $refreshTokenFamily) {
     try {
-        $config = config('Auth');
+        $config = config('API');
         
         $tokens = [
             'access' => getJWTForUser($email, $config->accessTokenTime),
