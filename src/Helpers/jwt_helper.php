@@ -23,7 +23,8 @@ function validateAccessToken(string $encodedToken)
     $decodedToken = JWT::decode($encodedToken, $publicKey);
     $userModel = new UserModel();
     $user = $userModel->where('email', $decodedToken->email)->first();
-    if ($user == null) 
+    $auth = service('authentication');
+    if(! $auth->login($user))
     {
         // Wasn't able to find the user, throw an error
         throw new Exception('User does not exist for specified email');
@@ -36,7 +37,8 @@ function validateRefreshToken(string $encodedToken)
     $decodedToken = JWT::decode($encodedToken, $publicKey);
     $userModel = new UserModel();
     $user = $userModel->where('email', $decodedToken->email)->first();
-    if ($user == null) 
+    $auth = service('authentication');
+    if(! $auth->login($user)) 
     {
         // Wasn't able to find the user, throw an error
         throw new Exception('User does not exist for specified email');

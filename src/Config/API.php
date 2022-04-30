@@ -16,7 +16,7 @@ class API extends BaseConfig
 	 * 
 	 * @var int 
 	 */
-	public $accessTokenTime = HOUR;
+	public $accessTokenTime = 1 * HOUR;
 
 	/**
 	 * --------------------------------------------------------------------

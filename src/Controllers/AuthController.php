@@ -2,32 +2,17 @@
 
 namespace NathanReus\CI4APIFramework\Controllers;
 
-use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
-use NathanReus\CI4APIFramework\Config\API as APIConfig;
 use RandomLib\Factory;
 use Exception;
 
 class AuthController extends APIController
 {
-	protected $auth;
-
-	/**
-	 * @var AuthConfig
-	 */
-	protected $authConfig;
-
-	/**
-	 * @var APIConfig
-	 */
-	protected $apiConfig;
 
 	public function __construct()
 	{
-		$this->authConfig = config('Auth');
-		$this->apiConfig = config('API');
-		$this->auth = service('authentication');
+
 	}
 
 	//--------------------------------------------------------------------

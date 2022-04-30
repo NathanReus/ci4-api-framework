@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\API\ResponseTrait;
 use Psr\Log\LoggerInterface;
+use NathanReus\CI4APIFramework\Config\API as APIConfig;
 
 class APIController extends Controller
 {
@@ -28,7 +29,17 @@ class APIController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['Myth\Auth\auth'];
+
+    /**
+     * The Myth Auth authentication service
+     */
+    protected $auth;
+
+    /**
+	 * @var APIConfig
+	 */
+	protected $apiConfig;
 
     /**
      * Constructor.
@@ -41,5 +52,9 @@ class APIController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        // Every API request needs this for the user object
+        $this->auth = service('authentication');
+        $this->apiConfig = config('API');
     }
 }
