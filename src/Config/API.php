@@ -8,6 +8,28 @@ class API extends BaseConfig
 {
 	/**
 	 * --------------------------------------------------------------------
+	 * Password Minimum Length
+	 * --------------------------------------------------------------------
+	 * 
+	 * The minimum number of characters permitted in a login password.
+	 * 
+	 * @var int
+	 */
+	public $passwordMinLength = 8;
+
+	/**
+	 * --------------------------------------------------------------------
+	 * Password Maximum Length
+	 * --------------------------------------------------------------------
+	 * 
+	 * The maxinum number of characters permitted in a login password.
+	 * 
+	 * @var int
+	 */
+	public $passwordMaxLength = 64;
+	
+	/**
+	 * --------------------------------------------------------------------
 	 * Access Token expiration period
 	 * --------------------------------------------------------------------
 	 * 

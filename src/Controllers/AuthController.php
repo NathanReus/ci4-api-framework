@@ -29,7 +29,7 @@ class AuthController extends APIController
 		// TODO: Change this back to user email or username like Myth Auth
         $rules = [
             'email'     => 'required|valid_email',
-            'password'  => 'required|min_length[8]|max_length[255]' // TODO: Move these length options to a config file
+            'password'  => 'required|min_length[' . $this->apiConfig->passwordMinLength . ']|max_length[' . $this->apiConfig->passwordMaxLength . ']',
         ];
 
         // Run the rules and return a failure if there's any errors
