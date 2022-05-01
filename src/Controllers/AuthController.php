@@ -67,7 +67,11 @@ class AuthController extends APIController
 	 * Log the user out.
 	 */
     public function logout() {
-        // TODO: Invalidate the refresh token family that this login was using - will need to have the refreshToken passed in for this
+		helper('jwt');
+		$refreshToken = validateRefreshToken(getJWTFromRequest($this->request->getServer('HTTP_AUTHORIZATION')));
+		deleteRefreshTokenFamily($refreshToken);
+
+		return $this->respondNoContent();
     }
 
 	/**

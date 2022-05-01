@@ -38,7 +38,7 @@ function validateRefreshToken(string $encodedToken)
     $userModel = new UserModel();
     $user = $userModel->where('email', $decodedToken->email)->first();
     $auth = service('authentication');
-    if(! $auth->login($user)) 
+    if($user == null) 
     {
         // Wasn't able to find the user, throw an error
         throw new Exception('User does not exist for specified email');
@@ -66,12 +66,13 @@ function validateRefreshToken(string $encodedToken)
     }
 
     // Put the user's email into the token object for now (isn't saved to DB) - needed in the response for calling method
+    // TODO: May now be able to do away with this using the auth service user object instead
     $refreshToken->email = $user->email;
 
     if ($refreshToken->issued_at != $issuedAtTime)
     {
         // Valid token, except the issued at time is different, means this is a stolen token being reused
-        $refreshTokenModel->delete($refreshToken->id);
+        deleteRefreshTokenFamily($refreshToken);
         throw new Exception('Not a valid refresh token.');
     }
 
@@ -135,4 +136,10 @@ function getTokensForUser(string $email, $refreshTokenFamily) {
     } catch (Exception $exception) {
         return false;
     }
+}
+
+function deleteRefreshTokenFamily(RefreshToken $refreshToken)
+{
+    $refreshTokenModel = new RefreshTokenModel();
+    $refreshTokenModel->delete($refreshToken->id);
 }
