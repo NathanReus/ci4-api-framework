@@ -27,6 +27,17 @@ class API extends BaseConfig
 	 * @var int
 	 */
 	public $passwordMaxLength = 64;
+
+	/**
+	 * --------------------------------------------------------------------
+	 * Permit POST Data
+	 * --------------------------------------------------------------------
+	 * 
+	 * If enabled, the API will accept data via 'POST'. If disabled, 
+	 * it will only accept via JSON in the body.
+	 * 
+	 */
+	public $permitPostData = true;
 	
 	/**
 	 * --------------------------------------------------------------------
