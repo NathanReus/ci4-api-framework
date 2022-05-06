@@ -5,7 +5,7 @@ function arrayToObject(array $array) {
 
     if (is_array($array) && count($array) > 0) {
         foreach ($array as $key => $value) {
-            $key = strtolower(trim($name));
+            $key = strtolower(trim($key));
             if (!empty($key)) {
                 $object->$key = arrayToObject($value);
             }
