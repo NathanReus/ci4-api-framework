@@ -66,7 +66,9 @@ class APIController extends Controller
         // Retrieve user input, whether from POST or JSON.
         if ($this->apiConfig->permitPostData)
         {
-            $this->input = arrayToObject($request->getPost());
+            if (count($request->getPost()) > 0) {
+                $this->input = arrayToObject($request->getPost());
+            }
         }
         
         if (empty($this->input))

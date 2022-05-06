@@ -1,6 +1,6 @@
 <?php
 
-function arrayToObject(array $array) {
+function arrayToObject($array) {
     $object = new StdClass();
 
     if (is_array($array) && count($array) > 0) {
