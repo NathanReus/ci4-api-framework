@@ -41,8 +41,8 @@ class AuthController extends APIController
 
         // Get the submitted values
 		// TODO: Update for username
-        $email = $this->input['email'];
-        $password = $this->input['password'];
+        $email = $this->input->email;
+        $password = $this->input->password;
         $remember = false;
 
         // Attempt to auth and return a failure if there's any errors

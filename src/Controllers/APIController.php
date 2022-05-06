@@ -30,7 +30,7 @@ class APIController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['Myth\Auth\auth'];
+    protected $helpers = ['Myth\Auth\auth', 'NathanReus\CI4APIFramework\array'];
 
     /**
      * The Myth Auth authentication service
@@ -66,14 +66,14 @@ class APIController extends Controller
         // Retrieve user input, whether from POST or JSON.
         if ($this->apiConfig->permitPostData)
         {
-            $this->input = $request->getPost();
+            $this->input = arrayToObject($request->getPost());
         }
         
         if (empty($this->input))
         {
             // There was no POST data in the request, let's get JSON body
             try {
-                $this->input = json_decode($request->getBody(), true);
+                $this->input = $request->getJSON();
             } catch(\Exception $e) {
                 $this->failValidationError('No data supplied.');
             }
@@ -107,6 +107,6 @@ class APIController extends Controller
             $rules = $validation->{$rules};
         }
 
-        return $this->validator->setRules($rules, $messages)->run($this->input);
+        return $this->validator->setRules($rules, $messages)->run(objectToArray($this->input));
     }
 }
